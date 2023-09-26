@@ -842,7 +842,7 @@ static GLFWbool createNativeWindow(_GLFWwindow* window,
 
         if (wndconfig->floating)
         {
-            [window->ns.object setLevel:NSFloatingWindowLevel];
+            [window->ns.object setLevel:NSMainMenuWindowLevel + 1];
             const NSWindowCollectionBehavior behavior = NSWindowCollectionBehaviorFullScreenAuxiliary | NSWindowCollectionBehaviorCanJoinAllSpaces;
             [window->ns.object setCollectionBehavior:behavior];
         }
@@ -1323,7 +1323,7 @@ void _glfwPlatformSetWindowMonitor(_GLFWwindow* window,
 
         if (window->floating)
         {
-            [window->ns.object setLevel:NSFloatingWindowLevel];
+            [window->ns.object setLevel:NSMainMenuWindowLevel + 1];
             const NSWindowCollectionBehavior behavior = NSWindowCollectionBehaviorFullScreenAuxiliary | NSWindowCollectionBehaviorCanJoinAllSpaces;
             [window->ns.object setCollectionBehavior:behavior];
         }
@@ -1464,7 +1464,7 @@ void _glfwPlatformSetWindowFloating(_GLFWwindow* window, GLFWbool enabled)
     @autoreleasepool {
     if (enabled)
     {
-        [window->ns.object setLevel:NSFloatingWindowLevel];
+        [window->ns.object setLevel:NSMainMenuWindowLevel + 1];
         const NSWindowCollectionBehavior behavior = NSWindowCollectionBehaviorFullScreenAuxiliary | NSWindowCollectionBehaviorCanJoinAllSpaces;
         [window->ns.object setCollectionBehavior:behavior];
     }
