@@ -841,7 +841,12 @@ static GLFWbool createNativeWindow(_GLFWwindow* window,
         }
 
         if (wndconfig->floating)
+        {
             [window->ns.object setLevel:NSFloatingWindowLevel];
+            const NSWindowCollectionBehavior behavior |=
+                NSWindowCollectionBehaviorFullScreenAuxiliary | NSWindowCollectionBehaviorCanJoinAllSpaces;
+            [window->ns.object setCollectionBehavior:behavior];
+        }
 
         if (wndconfig->maximized)
             [window->ns.object zoom:nil];
@@ -1318,9 +1323,16 @@ void _glfwPlatformSetWindowMonitor(_GLFWwindow* window,
         }
 
         if (window->floating)
+        {
             [window->ns.object setLevel:NSFloatingWindowLevel];
+            const NSWindowCollectionBehavior behavior |=
+                NSWindowCollectionBehaviorFullScreenAuxiliary | NSWindowCollectionBehaviorCanJoinAllSpaces;
+            [window->ns.object setCollectionBehavior:behavior];
+        }
         else
+        {
             [window->ns.object setLevel:NSNormalWindowLevel];
+        }
 
         if (window->resizable)
         {
@@ -1453,9 +1465,16 @@ void _glfwPlatformSetWindowFloating(_GLFWwindow* window, GLFWbool enabled)
 {
     @autoreleasepool {
     if (enabled)
+    {
         [window->ns.object setLevel:NSFloatingWindowLevel];
+        const NSWindowCollectionBehavior behavior |=
+            NSWindowCollectionBehaviorFullScreenAuxiliary | NSWindowCollectionBehaviorCanJoinAllSpaces;
+        [window->ns.object setCollectionBehavior:behavior];
+    }
     else
+    {
         [window->ns.object setLevel:NSNormalWindowLevel];
+    }
     } // autoreleasepool
 }
 
